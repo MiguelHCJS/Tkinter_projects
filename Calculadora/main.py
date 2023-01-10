@@ -4,8 +4,6 @@ from multiprocessing import Process
 
 class Calc:
 
-    __instance = None
-    
     def __init__(self) -> None:
 
         """
@@ -20,7 +18,6 @@ class Calc:
 
         self.frame = Frame(self.window)
         self.frame.pack()
-
 
         """
         Botões numéricos
@@ -84,22 +81,6 @@ class Calc:
         self.numscreen.delete(0, END)
         self.numscreen.insert(0, resultado)
 
-    @classmethod
-    def local(self):
-        print(Calc.__instance)
-
-    @classmethod
-    def instance(cls):
-        if cls.__instance is None:
-            cls.instance = cls()
-        return cls.__instance
-    
-    def __repr__(self) -> str:
-        return f'Id do objeto {self}, {id(self.__instance)}'
-    
-    def __str__(self) -> str:
-        return f'Id do objeto {self}, {id(self.__instance)}'
 
 if __name__ == '__main__':
-    calculadora = Calc().instance
-    
+    calculadora = Calc()
