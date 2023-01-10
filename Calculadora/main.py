@@ -1,5 +1,4 @@
 from tkinter import *
-from multiprocessing import Process
 
 
 class Calc:
