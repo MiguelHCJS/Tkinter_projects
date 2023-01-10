@@ -1,9 +1,13 @@
 from tkinter import *
+from multiprocessing import Process
 
 
 class Calc:
 
-    def __init__(self):
+    __instance = None
+    
+    def __init__(self) -> None:
+
         """
         Configuração de janelas
         """
@@ -16,6 +20,7 @@ class Calc:
 
         self.frame = Frame(self.window)
         self.frame.pack()
+
 
         """
         Botões numéricos
@@ -30,6 +35,7 @@ class Calc:
         self.button8 = Button(self.frame, bg='orange', fg='white', bd=0, text='8', width=5, height=4, command=lambda: self.touch(8))
         self.button9 = Button(self.frame, bg='orange', fg='white', bd=0, text='9', width=5, height=4, command=lambda: self.touch(9))
         self.button0 = Button(self.frame, bg='orange', fg='white', bd=0, text='0', width=5, height=4, command=lambda: self.touch(0))
+        
         """
         Botões de operação
         """
@@ -78,6 +84,22 @@ class Calc:
         self.numscreen.delete(0, END)
         self.numscreen.insert(0, resultado)
 
+    @classmethod
+    def local(self):
+        print(Calc.__instance)
+
+    @classmethod
+    def instance(cls):
+        if cls.__instance is None:
+            cls.instance = cls()
+        return cls.__instance
+    
+    def __repr__(self) -> str:
+        return f'Id do objeto {self}, {id(self.__instance)}'
+    
+    def __str__(self) -> str:
+        return f'Id do objeto {self}, {id(self.__instance)}'
 
 if __name__ == '__main__':
-    calc = Calc()
+    calculadora = Calc().instance
+    
